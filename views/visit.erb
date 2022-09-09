@@ -3,10 +3,20 @@
 <p>On this page you can book a haircut.</p>
 
 <form action="/visit" method="post">
-  <div class="mb-3">
-    <label class="form-label">Your name</label>
-    <input name="user_name" type="text" class="form-control" placeholder="Enter your name">
-  </div>
+    <div class="mb-3">
+        <label class="form-label">Your name</label>
+        <input name="user_name" type="text" class="form-control" placeholder="Enter your name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Your phone</label>
+        <input name="user_phone_number" type="text" class="form-control" placeholder="Enter your phone number">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">When are you coming for a haircut?</label>
+        <input name="datetime" type="text" class="form-control" placeholder="Indicate the time and date when you will come for a haircut">
+    </div>
   
-  <button type="submit" class="btn btn-primary">Sign up</button>
+    <button type="submit" class="btn btn-primary">Sign up</button>
 </form>
