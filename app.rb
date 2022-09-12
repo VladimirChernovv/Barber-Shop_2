@@ -33,10 +33,10 @@ post '/visit' do
   @barber = params[:barber]
 
   @notification = "Thank you."
-  @notification_title = "Dear #{@user_name} we'll be wating for you at #{@datetime}."
+  @notification_title = "Dear #{@user_name} we'll be wating for you at #{@datetime}. Your barber #{@barber} is booked."
 
   notebook = File.open './publick/notebook.txt', 'a'
-  notebook.write "User: #{@user_name}, Phone: #{@user_phone_number}, Barber: #{@barber} Date: #{@datetime}\n"
+  notebook.write "User: #{@user_name}, Phone: #{@user_phone_number}, Barber: #{@barber}, Date: #{@datetime}\n"
   notebook.close
 
   erb :notification
