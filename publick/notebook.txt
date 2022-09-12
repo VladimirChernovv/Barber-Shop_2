@@ -1,4 +1,0 @@
-User: Alan, Phone: 111, Date: 12.02 at 14.45
-User: Jim, Phone: +7(960)123-22-33, Date: 27.05 at 10.20
-User: Steven, Phone: +7(905)348-12-71, Date: 04.11 at 18.55
-User: Anna, Phone: 555, Date: 12.04 at 10:00
