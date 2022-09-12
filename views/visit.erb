@@ -3,6 +3,17 @@
 <p>On this page you can book a haircut.</p>
 
 <form action="/visit" method="post">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Choose the brber you want to book a haircut with.</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+            <option value="barber">Harry Potter</option>
+            <option value="barber">Bill M</option>
+            <option value="barber">Anna Smiht</option>
+            <option value="barber">Jason Statham</option>
+            <option value="barber">Magister Yoda</option>
+        </select>
+    </div>
+
     <div class="mb-3">
         <label class="form-label">Your name</label>
         <input name="user_name" type="text" class="form-control" placeholder="Enter your name">

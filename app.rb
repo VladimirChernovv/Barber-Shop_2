@@ -3,7 +3,19 @@ require 'sinatra'
 require 'sinatra/reloader'
 
 get '/' do
-  erb "Hello! <a href="" >Original</a>"
+  erb :main
+end
+
+post '/' do
+  @main_login = params[:main_login]
+  @main_password = params[:main_password]
+
+  if @main_login == 'admin' && @main_password == 'secret161'
+    erb :welcome
+  else
+    erb :error
+  end
+  
 end
 
 get '/about' do
@@ -18,12 +30,13 @@ post '/visit' do
   @user_name = params[:user_name]
   @user_phone_number = params[:user_phone_number]
   @datetime = params[:datetime]
+  @barber = params[:barber]
 
   @notification = "Thank you."
   @notification_title = "Dear #{@user_name} we'll be wating for you at #{@datetime}."
 
   notebook = File.open './publick/notebook.txt', 'a'
-  notebook.write "User: #{@user_name}, Phone: #{@user_phone_number}, Date: #{@datetime}\n"
+  notebook.write "User: #{@user_name}, Phone: #{@user_phone_number}, Barber: #{@barber} Date: #{@datetime}\n"
   notebook.close
 
   erb :notification
