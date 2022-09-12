@@ -32,3 +32,14 @@ end
 get '/contacts' do
   erb :contacts
 end
+
+post '/contacts' do
+  @email = params[:email]
+  @user_message = params[:user_message]
+
+  customer_data = File.open './publick/customer_data.txt', 'a'
+  customer_data.write "User email: #{@email}, User message: #{@user_message}\n"
+  customer_data.close
+
+  erb :contacts
+end
