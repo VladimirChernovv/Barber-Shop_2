@@ -1,15 +1,21 @@
-<h2>Contacts</h2>
+<h2 class="ccc">Contacts</h2>
 
 <form action="/contacts" method="post">
   <div class="form-group">
     <label for="exampleFormControlInput1">Email address</label>
-    <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    <input id="aaa" name="email" type="text" class="form-control" placeholder="name@example.com">
   </div>
   
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea name="user_message" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <textarea id="bbb" name="user_message" class="form-control" rows="3"></textarea>
   </div>
 
   <button type="submit" class="btn btn-primary">Send</button>
 </form>
+
+<script type="text/javascript">
+  $('#aaa').css('background-color', '#FED6BC')
+  $('#bbb').css('background-color', 'plum')
+  $('.ccc').css('background-color', '#B5F2EA')
+</script>

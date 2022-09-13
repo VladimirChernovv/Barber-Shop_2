@@ -31,12 +31,13 @@ post '/visit' do
   @user_phone_number = params[:user_phone_number]
   @datetime = params[:datetime]
   @barber = params[:barber]
+  @color = params[:color]
 
   @notification = "Thank you."
-  @notification_title = "Dear #{@user_name} we'll be wating for you at #{@datetime}. Your barber #{@barber} is booked."
+  @notification_title = "Dear #{@user_name} we'll be wating for you at #{@datetime}. Your barber #{@barber} is booked. You choose color - #{@color}"
 
-  notebook = File.open './publick/notebook.txt', 'a'
-  notebook.write "User: #{@user_name}, Phone: #{@user_phone_number}, Barber: #{@barber}, Date: #{@datetime}\n"
+  notebook = File.open './public/notebook.txt', 'a'
+  notebook.write "User: #{@user_name}, Phone: #{@user_phone_number}, Barber: #{@barber}, Date: #{@datetime}, Color: #{@color}\n"
   notebook.close
 
   erb :notification
@@ -50,7 +51,7 @@ post '/contacts' do
   @email = params[:email]
   @user_message = params[:user_message]
 
-  customer_data = File.open './publick/customer_data.txt', 'a'
+  customer_data = File.open './public/customer_data.txt', 'a'
   customer_data.write "User email: #{@email}, User message: #{@user_message}\n"
   customer_data.close
 
