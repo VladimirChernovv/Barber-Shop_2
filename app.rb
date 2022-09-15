@@ -38,18 +38,10 @@ post '/visit' do
     :datetime => 'Enter date and time'
   }
 
-  # для каждой пары ключ-значение
-  hh.each do |key, value|
-    # если параметр пуст
-    if params[key] == ''
-      # переменной error присвоить value из хэша hh
-      # (а value из хэша hh это сообщение об ошибке)
-      # т.е. переменной error присвоить сообщение об ошибке
-      @error = hh[key]
+  @error = hh.select {|key, _| params[key] == ''}.values.join(", ")
 
-      # вернуть представление visit
-      return erb :visit
-    end
+  if @error != ""
+    return erb :visit
   end
 
   @notification = "Thank you."
