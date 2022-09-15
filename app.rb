@@ -15,7 +15,6 @@ post '/' do
   else
     erb :error
   end
-  
 end
 
 get '/about' do
@@ -32,6 +31,11 @@ post '/visit' do
   @datetime = params[:datetime]
   @barber = params[:barber]
   @color = params[:color]
+
+  if @user_name == ''
+    @error = "Enter your name."
+    return erb :visit
+  end
 
   @notification = "Thank you."
   @notification_title = "Dear #{@user_name} we'll be wating for you at #{@datetime}. Your barber #{@barber} is booked. You choose color - #{@color}"
