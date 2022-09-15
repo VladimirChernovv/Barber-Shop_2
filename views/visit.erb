@@ -3,6 +3,21 @@
 <p>On this page you can book a haircut.</p>
 
 <form action="/visit" method="post">
+    <div class="mb-3">
+        <label class="form-label">Your name</label>
+        <input name="user_name" value="<%= @user_name %>" type="text" class="form-control" placeholder="Enter your name">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Your phone</label>
+        <input name="user_phone" value="<%= @user_phone %>" type="text" class="form-control" placeholder="Enter your phone number">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">When are you coming for a haircut?</label>
+        <input name="datetime" value="<%= @datetime %>" type="text" class="form-control" placeholder="Indicate the time and date when you will come for a haircut">
+    </div>
+
     <div class="form-group">
         <label for="barber">Choose the barber you want to book a haircut with.</label>
         <select name="barber" value="none" class="form-control" id="exampleFormControlSelect1">
@@ -12,21 +27,6 @@
             <option value="Jason Statham">Jason Statham</option>
             <option value="Magister Yoda">Magister Yoda</option>
         </select>
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Your name</label>
-        <input name="user_name" type="text" class="form-control" placeholder="Enter your name">
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">Your phone</label>
-        <input name="user_phone" type="text" class="form-control" placeholder="Enter your phone number">
-    </div>
-
-    <div class="mb-3">
-        <label class="form-label">When are you coming for a haircut?</label>
-        <input name="datetime" type="text" class="form-control" placeholder="Indicate the time and date when you will come for a haircut">
     </div>
 
     <div class="mb-3">
