@@ -27,21 +27,36 @@ end
 
 post '/visit' do
   @user_name = params[:user_name]
-  @user_phone_number = params[:user_phone_number]
+  @user_phone = params[:user_phone]
   @datetime = params[:datetime]
   @barber = params[:barber]
   @color = params[:color]
 
-  if @user_name == ''
-    @error = "Enter your name."
-    return erb :visit
+  hh = {
+    :user_name => 'Enter your name',
+    :user_phone => 'Enter phone number',
+    :datetime => 'Enter date and time'
+  }
+
+  # для каждой пары ключ-значение
+  hh.each do |key, value|
+    # если параметр пуст
+    if params[key] == ''
+      # переменной error присвоить value из хэша hh
+      # (а value из хэша hh это сообщение об ошибке)
+      # т.е. переменной error присвоить сообщение об ошибке
+      @error = hh[key]
+
+      # вернуть представление visit
+      return erb :visit
+    end
   end
 
   @notification = "Thank you."
   @notification_title = "Dear #{@user_name} we'll be wating for you at #{@datetime}. Your barber #{@barber} is booked. You choose color - #{@color}"
 
   notebook = File.open './public/notebook.txt', 'a'
-  notebook.write "User: #{@user_name}, Phone: #{@user_phone_number}, Barber: #{@barber}, Date: #{@datetime}, Color: #{@color}\n"
+  notebook.write "User: #{@user_name}, Phone: #{@user_phone}, Barber: #{@barber}, Date: #{@datetime}, Color: #{@color}\n"
   notebook.close
 
   erb :notification
