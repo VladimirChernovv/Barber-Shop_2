@@ -32,13 +32,13 @@ post '/visit' do
   @barber = params[:barber]
   @color = params[:color]
 
-  hh = {
+  warnings = {
     :user_name => 'Enter your name',
     :user_phone => 'Enter phone number',
     :datetime => 'Enter date and time'
   }
 
-  @error = hh.select {|key, _| params[key] == ''}.values.join(", ")
+  @error = warnings.select {|key, _| params[key] == ''}.values.join(", ")
 
   if @error != ""
     return erb :visit
@@ -59,12 +59,45 @@ get '/contacts' do
 end
 
 post '/contacts' do
+  require 'pony'  
+
   @email = params[:email]
   @user_message = params[:user_message]
+  my_email = "dgudo73@gmail.com"
+  password = File.read './public/password_for_pony.txt', 16
+
+  warnings = {
+    :email => 'Enter your email',
+    :user_message => 'Write a message'
+  }
+
+  @error = warnings.select {|key,_| params[key] == ''}.values.join(", ")
+
+  if @error != ""
+    return erb :contacts
+  end
+
+  Pony.mail(
+    body: @user_message,
+    to: @email,
+    from: @my_email,
+    via: :smtp,
+    via_options: {
+      address: 'smtp.gmail.com',
+      port: '587',
+      enable_starttls_auto: true,
+      user_name: my_email,
+      password: password,
+      authentication: :plain
+    }
+  )
 
   customer_data = File.open './public/customer_data.txt', 'a'
   customer_data.write "User email: #{@email}, User message: #{@user_message}\n"
   customer_data.close
 
-  erb :contacts
+  @notification = "Thank you!"
+  @notification_title = "The message was successfully sent."
+
+  erb :notification
 end
