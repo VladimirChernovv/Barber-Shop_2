@@ -3,14 +3,18 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
+
+
 configure do
   # Создаём новое подключение к БД(barber_shop.db)
   # Если этот файл есть, то БД будет открыта
   # Если файла нет, он будет создан в текущем каталоге приложения
-  @db = SQLite3::Database.new 'barber_shop.db'
+  # db = SQLite3::Database.new 'barber_shop.db'
+
+  db = get_db
 
   # Выполняем команду для создания таблицы
-  @db.execute 'CREATE TABLE IF NOT EXISTS
+  db.execute 'CREATE TABLE IF NOT EXISTS
     "Users"
     (
       "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,6 +25,13 @@ configure do
       "color" TEXT
     )
   '
+end
+
+# Метод который возвращает экземпляр объекта
+# который отвечает за работу с БД
+# возвращение должно быть обязательно со словом return
+def get_db
+  return SQLite3::Database.new 'barber_shop.db'
 end
 
 get '/' do
@@ -67,6 +78,19 @@ post '/visit' do
 
   @notification = "Thank you."
   @notification_title = "Dear #{@user_name} we'll be wating for you at #{@date_stamp}. Your barber #{@barber} is booked. You choose color - #{@color}"
+
+  db = get_db
+  db.execute 'insert into
+    Users
+    (
+      user_name,
+      user_phone,
+      date_stamp,
+      barber,
+      color
+    )
+
+    values ( ?, ?, ?, ?, ? )',[@user_name, @user_phone, @date_stamp, @barber, @color]
 
   notebook = File.open './public/notebook.txt', 'a'
   notebook.write "User: #{@user_name}, Phone: #{@user_phone}, Barber: #{@barber}, Date: #{@date_stamp}, Color: #{@color}\n"
@@ -122,3 +146,4 @@ post '/contacts' do
 
   erb :notification
 end
+
