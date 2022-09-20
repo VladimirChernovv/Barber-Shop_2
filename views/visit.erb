@@ -21,11 +21,11 @@
     <div class="form-group">
         <label for="barber">Choose the barber you want to book a haircut with.</label>
         <select name="barber" value="none" class="form-control" id="exampleFormControlSelect1">
-            <option value="Harry Potter">Harry Potter</option>
-            <option value="Bill M">Michael J</option>
-            <option value="Anna Smiht">Anna Smiht</option>
-            <option value="Jason Statham">Jason Statham</option>
-            <option value="Magister Yoda">Magister Yoda</option>
+            <option value="Harry Potter" <%= @barber == 'Harry Potter'  ? 'selected' : '' %>>Harry Potter</option>
+            <option value="Michael J" <%= @barber == 'Michael J'  ? 'selected' : '' %>>Michael J</option>
+            <option value="Anna Smiht" <%= @barber == 'Anna Smiht'  ? 'selected' : '' %>>Anna Smiht</option>
+            <option value="Jason Statham" <%= @barber == 'Jason Statham'  ? 'selected' : '' %>>Jason Statham</option>
+            <option value="Magister Yoda" <%= @barber == 'Magister Yoda'  ? 'selected' : '' %>>Magister Yoda</option>
         </select>
     </div>
 
