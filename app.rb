@@ -1,6 +1,27 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sqlite3'
+
+configure do
+  # Создаём новое подключение к БД(barber_shop.db)
+  # Если этот файл есть, то БД будет открыта
+  # Если файла нет, он будет создан в текущем каталоге приложения
+  @db = SQLite3::Database.new 'barber_shop.db'
+
+  # Выполняем команду для создания таблицы
+  @db.execute 'CREATE TABLE IF NOT EXISTS
+    "Users"
+    (
+      "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+      "user_name" TEXT,
+      "user_phone" TEXT,
+      "date_stamp" TEXT,
+      "barber" TEXT,
+      "color" TEXT
+    )
+  '
+end
 
 get '/' do
   erb :main
@@ -28,14 +49,14 @@ end
 post '/visit' do
   @user_name = params[:user_name]
   @user_phone = params[:user_phone]
-  @datetime = params[:datetime]
+  @date_stamp = params[:date_stamp]
   @barber = params[:barber]
   @color = params[:color]
 
   warnings = {
     :user_name => 'Enter your name',
     :user_phone => 'Enter phone number',
-    :datetime => 'Enter date and time'
+    :date_stamp => 'Enter date and time'
   }
 
   @error = warnings.select {|key, _| params[key] == ''}.values.join(", ")
@@ -45,10 +66,10 @@ post '/visit' do
   end
 
   @notification = "Thank you."
-  @notification_title = "Dear #{@user_name} we'll be wating for you at #{@datetime}. Your barber #{@barber} is booked. You choose color - #{@color}"
+  @notification_title = "Dear #{@user_name} we'll be wating for you at #{@date_stamp}. Your barber #{@barber} is booked. You choose color - #{@color}"
 
   notebook = File.open './public/notebook.txt', 'a'
-  notebook.write "User: #{@user_name}, Phone: #{@user_phone}, Barber: #{@barber}, Date: #{@datetime}, Color: #{@color}\n"
+  notebook.write "User: #{@user_name}, Phone: #{@user_phone}, Barber: #{@barber}, Date: #{@date_stamp}, Color: #{@color}\n"
   notebook.close
 
   erb :notification
