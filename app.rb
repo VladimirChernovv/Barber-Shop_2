@@ -3,7 +3,12 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
-
+# Метод который возвращает экземпляр объекта
+# который отвечает за работу с БД
+# возвращение должно быть обязательно со словом return
+def get_db
+  return SQLite3::Database.new 'barber_shop.db'
+end
 
 configure do
   # Создаём новое подключение к БД(barber_shop.db)
@@ -25,13 +30,6 @@ configure do
       "color" TEXT
     )
   '
-end
-
-# Метод который возвращает экземпляр объекта
-# который отвечает за работу с БД
-# возвращение должно быть обязательно со словом return
-def get_db
-  return SQLite3::Database.new 'barber_shop.db'
 end
 
 get '/' do
