@@ -7,7 +7,9 @@ require 'sqlite3'
 # который отвечает за работу с БД
 # возвращение должно быть обязательно со словом return
 def get_db
-  return SQLite3::Database.new 'barber_shop.db'
+  db = SQLite3::Database.new 'barber_shop.db'
+  db.results_as_hash = true
+  return true
 end
 
 configure do
@@ -145,3 +147,6 @@ post '/contacts' do
   erb :notification
 end
 
+get 'show_users' do
+
+end
